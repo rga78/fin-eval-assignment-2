@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Portfolio Optimization: (1) Large/Small/Growth/Value/Gold, (2) US/Japan/Asia-Pacific/Europe</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>Portfolio Optimization: (1) Large/Small/Growth/Value/Gold, (2) US/Japan/Asia-Pacific/Europe</h1>
+
+<p><a href="https://www.coursera.org/learn/investments">Financial Evaluation and Investment Strategy</a><br/>
+<a href="https://www.coursera.org/learn/investments/peer/nWsgY/assignment-2">Assignment #2 (1.8)</a><br/>
+Rob Alderman<br/>
+Aug 2015   </p>
+
+<hr/>
+
+<h2>Part 1: Large/Small/Growth/Value/Gold</h2>
+
+<h3>Load the data</h3>
+
+<p>Data copied from EfficientFrontier-LargeSmall-ValueGrowth-Gold.xlsx.</p>
+
+<pre><code class="r">source(&quot;eff.frontier.R&quot;)
+
+assets.cor &lt;- matrix( c(
+                        1.00, 0.65, 0.75, 0.93, -0.01,
+                        0.65, 1.00, 0.75, 0.69, 0.07,
+                        0.75, 0.75, 1.00, 0.65, 0.01,
+                        0.93, 0.69, 0.65, 1.00, 0.00,
+                        -0.01, 0.07, 0.01, 0.00, 1.00),
+                     nrow=5)
+
+assets.sd &lt;- c(
+                4.30,
+                6.10,
+                5.94,
+                5.13,
+                5.66) / 100
+
+assets.covar &lt;- eff.cor2cov( assets.cor, assets.sd )
+
+assets.er &lt;- matrix( c(
+                        1.01,
+                        1.35,
+                        1.51,
+                        0.95,
+                        0.54 ) / 100,
+                     nrow=1 )
+
+colnames(assets.er) &lt;- c(&quot;large&quot;, &quot;small&quot;, &quot;value&quot;, &quot;growth&quot;, &quot;gold&quot;)
+
+
+risk.free.rate &lt;- 0.4 / 100
+
+eff.noshort &lt;- eff.frontier(assets.covar, 
+                            assets.er , 
+                            short=&quot;no&quot;, 
+                            risk.free.rate=risk.free.rate)
+
+eff.short &lt;- eff.frontier(assets.covar, 
+                          assets.er , 
+                          short=&quot;yes&quot;, 
+                          risk.free.rate=risk.free.rate)
+</code></pre>
+
+<h3>Question 1.</h3>
+
+<p>CANNOT short.<br/>
+Find the portfolio that maximizes expected return  at same risk as 100% large stocks (sd=4.30%).
+What is the expected return / weights ?
+How much greater is expected return per month than 100% large stocks.</p>
+
+<pre><code class="r">eff &lt;- eff.varEquals( eff.noshort, sd=4.30/100 )
+round(eff, 5)
+</code></pre>
+
+<pre><code>##        large   small   value growth    gold Std.Dev Exp.Return  sharpe
+## 1814 0.22226 0.10538 0.47983      0 0.19254 0.04291    0.01195 0.18534
+## 1815 0.22201 0.10542 0.48012      0 0.19244 0.04292    0.01195 0.18536
+## 1816 0.22177 0.10547 0.48042      0 0.19235 0.04292    0.01196 0.18537
+## 1817 0.22152 0.10552 0.48071      0 0.19225 0.04293    0.01196 0.18538
+## 1818 0.22127 0.10556 0.48101      0 0.19216 0.04294    0.01196 0.18539
+## 1819 0.22103 0.10561 0.48130      0 0.19206 0.04295    0.01196 0.18540
+## 1820 0.22078 0.10566 0.48159      0 0.19197 0.04296    0.01196 0.18541
+## 1821 0.22054 0.10570 0.48189      0 0.19187 0.04297    0.01197 0.18542
+## 1822 0.22029 0.10575 0.48218      0 0.19178 0.04298    0.01197 0.18543
+## 1823 0.22005 0.10580 0.48248      0 0.19168 0.04299    0.01197 0.18544
+## 1824 0.21980 0.10584 0.48277      0 0.19159 0.04299    0.01197 0.18545
+## 1825 0.21956 0.10589 0.48307      0 0.19149 0.04300    0.01198 0.18546
+## 1826 0.21931 0.10593 0.48336      0 0.19139 0.04301    0.01198 0.18547
+## 1827 0.21906 0.10598 0.48365      0 0.19130 0.04302    0.01198 0.18548
+## 1828 0.21882 0.10603 0.48395      0 0.19120 0.04303    0.01198 0.18549
+## 1829 0.21857 0.10607 0.48424      0 0.19111 0.04304    0.01198 0.18550
+## 1830 0.21833 0.10612 0.48454      0 0.19101 0.04305    0.01199 0.18551
+## 1831 0.21808 0.10617 0.48483      0 0.19092 0.04306    0.01199 0.18552
+## 1832 0.21784 0.10621 0.48513      0 0.19082 0.04307    0.01199 0.18553
+## 1833 0.21759 0.10626 0.48542      0 0.19073 0.04307    0.01199 0.18554
+## 1834 0.21735 0.10631 0.48572      0 0.19063 0.04308    0.01199 0.18555
+## 1835 0.21710 0.10635 0.48601      0 0.19054 0.04309    0.01200 0.18556
+</code></pre>
+
+<h3>Question 2.</h3>
+
+<p>CAN short.<br/>
+Find the portfolio that maximizes expected return  at same risk as 100% large stocks.
+What is the expected return / weights ?
+Which asset do you short?
+Which asset has the biggest increase in weight over question 1?  Why?
+How much greater is expected return over question 1?
+Is shorting important in this example?</p>
+
+<pre><code class="r">eff &lt;- eff.varEquals( eff.short, sd=4.30/100 )
+round(eff, 5)
+</code></pre>
+
+<pre><code>##        large   small   value   growth    gold Std.Dev Exp.Return  sharpe
+## 1880 1.11339 0.30325 0.30334 -0.86019 0.14021 0.04290    0.01250 0.19824
+## 1881 1.11333 0.30333 0.30360 -0.86036 0.14011 0.04291    0.01251 0.19825
+## 1882 1.11326 0.30342 0.30385 -0.86054 0.14000 0.04292    0.01251 0.19825
+## 1883 1.11320 0.30351 0.30411 -0.86071 0.13990 0.04293    0.01251 0.19826
+## 1884 1.11314 0.30359 0.30436 -0.86088 0.13979 0.04294    0.01251 0.19827
+## 1885 1.11307 0.30368 0.30462 -0.86105 0.13969 0.04295    0.01252 0.19827
+## 1886 1.11301 0.30376 0.30487 -0.86123 0.13958 0.04296    0.01252 0.19828
+## 1887 1.11295 0.30385 0.30513 -0.86140 0.13948 0.04297    0.01252 0.19829
+## 1888 1.11288 0.30393 0.30538 -0.86157 0.13937 0.04298    0.01252 0.19829
+## 1889 1.11282 0.30402 0.30564 -0.86174 0.13927 0.04299    0.01252 0.19830
+## 1890 1.11276 0.30411 0.30589 -0.86192 0.13916 0.04300    0.01253 0.19831
+## 1891 1.11269 0.30419 0.30615 -0.86209 0.13906 0.04301    0.01253 0.19831
+## 1892 1.11263 0.30428 0.30640 -0.86226 0.13896 0.04302    0.01253 0.19832
+## 1893 1.11256 0.30436 0.30666 -0.86243 0.13885 0.04303    0.01253 0.19833
+## 1894 1.11250 0.30445 0.30691 -0.86261 0.13875 0.04303    0.01254 0.19833
+## 1895 1.11244 0.30453 0.30717 -0.86278 0.13864 0.04304    0.01254 0.19834
+## 1896 1.11237 0.30462 0.30742 -0.86295 0.13854 0.04305    0.01254 0.19834
+## 1897 1.11231 0.30471 0.30768 -0.86312 0.13843 0.04306    0.01254 0.19835
+## 1898 1.11225 0.30479 0.30793 -0.86330 0.13833 0.04307    0.01254 0.19836
+## 1899 1.11218 0.30488 0.30819 -0.86347 0.13822 0.04308    0.01255 0.19836
+## 1900 1.11212 0.30496 0.30844 -0.86364 0.13812 0.04309    0.01255 0.19837
+</code></pre>
+
+<h3>Question 3.</h3>
+
+<p>CANNOT short.<br/>
+Find the portfolio that maximizes sharpe ratio.
+What are the expected return / standard deviation / weights ?
+Is GOLD in the portfolio?  Why or why not?</p>
+
+<pre><code class="r">eff &lt;- eff.maxSharpe( eff.noshort )
+round(eff, 5)
+</code></pre>
+
+<pre><code>##      large   small   value growth    gold Std.Dev Exp.Return  sharpe
+## 2753     0 0.14731 0.75137      0 0.10131 0.05215    0.01388 0.18949
+</code></pre>
+
+<hr/>
+
+<h2>Part 2:  US/Japan/Asia-Pacific/Europe</h2>
+
+<h3>Load the data</h3>
+
+<p>Data copied from EfficientFrontier-US-International.xlsx </p>
+
+<pre><code class="r">assets.cor &lt;- matrix( c( 
+                         1.00, 0.41, 0.71, 0.79,
+                         0.41, 1.00, 0.47, 0.50,
+                         0.71, 0.47, 1.00, 0.75,
+                         0.79, 0.50, 0.75, 1.00 ),
+                     nrow=4 )
+assets.sd &lt;- c( 
+                4.34,
+                5.97,
+                6.01,
+                5.04) / 100
+
+assets.covar &lt;- eff.cor2cov( assets.cor, assets.sd )
+
+
+assets.er &lt;- matrix( c( 
+                        0.89,
+                        0.21,
+                        0.96,
+                        0.74) / 100,
+                     nrow=1)
+
+colnames(assets.er) &lt;- c(&quot;us&quot;, &quot;japan&quot;, &quot;asia-pacific&quot;, &quot;europe&quot;)
+
+risk.free.rate &lt;- 0.24 / 100
+
+eff.noshort &lt;- eff.frontier(assets.covar, 
+                            assets.er , 
+                            short=&quot;no&quot;, 
+                            risk.free.rate=risk.free.rate)
+</code></pre>
+
+<h3>Question 4</h3>
+
+<p>CANNOT short.
+Find the portfolio that maximizes expected return for the same risk as 100% US stocks.
+What are the expected return and weights?</p>
+
+<pre><code class="r">eff &lt;- eff.varEquals( eff.noshort, 4.34 / 100 , tolerance=0.00001)
+round(eff, 5)
+</code></pre>
+
+<pre><code>##           us   japan asia-pacific europe Std.Dev Exp.Return  sharpe
+## 1139 0.93651 0.00217      0.06132      0 0.04339    0.00893 0.15044
+## 1140 0.93661 0.00194      0.06145      0 0.04340    0.00893 0.15046
+## 1141 0.93672 0.00171      0.06157      0 0.04340    0.00893 0.15049
+## 1142 0.93682 0.00148      0.06169      0 0.04341    0.00893 0.15051
+</code></pre>
+
+<h3>Question 5</h3>
+
+<p>CANNOT short.
+Find the portfolio that maximizes sharpe ratio.<br/>
+What are the expected returns, standard deviation, and weights?
+Is Japan in the portfolio?  Why or why not?</p>
+
+<pre><code class="r">eff &lt;- eff.maxSharpe( eff.noshort)
+round(eff, 5)
+</code></pre>
+
+<pre><code>##           us japan asia-pacific europe Std.Dev Exp.Return  sharpe
+## 2892 0.86939     0      0.13061      0 0.04366    0.00899 0.15099
+</code></pre>
+
+<h3>Question 6</h3>
+
+<p>CANNOT short.
+Assume Japan expected return is 0.96% (same as Asia Pacific).
+Find the portfolio that maximizes sharpe ratio.<br/>
+What are the expected returns, standard deviation, and weights?</p>
+
+<pre><code class="r">assets.er &lt;- matrix( c( 
+                        0.89,
+                        0.96,
+                        0.96,
+                        0.74) / 100,
+                     nrow=1)
+
+colnames(assets.er) &lt;- c(&quot;us&quot;, &quot;japan&quot;, &quot;asia-pacific&quot;, &quot;europe&quot;)
+
+eff.noshort &lt;- eff.frontier(assets.covar, 
+                            assets.er , 
+                            short=&quot;no&quot;, 
+                            risk.free.rate=risk.free.rate)
+
+eff &lt;- eff.maxSharpe( eff.noshort )
+round(eff, 5)
+</code></pre>
+
+<pre><code>##           us  japan asia-pacific europe Std.Dev Exp.Return  sharpe
+## 2521 0.69437 0.2989      0.00673      0 0.04113    0.00911 0.16323
+</code></pre>
+
+</body>
+
+</html>

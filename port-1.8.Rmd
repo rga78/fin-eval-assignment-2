@@ -1,0 +1,203 @@
+# Portfolio Optimization: (1) Large/Small/Growth/Value/Gold, (2) US/Japan/Asia-Pacific/Europe
+
+[Financial Evaluation and Investment Strategy](https://www.coursera.org/learn/investments)   
+[Assignment #2 (1.8)](https://www.coursera.org/learn/investments/peer/nWsgY/assignment-2)   
+Rob Alderman   
+Aug 2015   
+
+
+---
+
+## Part 1: Large/Small/Growth/Value/Gold
+### Load the data
+
+Data copied from EfficientFrontier-LargeSmall-ValueGrowth-Gold.xlsx.
+
+```{r}
+
+source("eff.frontier.R")
+
+assets.cor <- matrix( c(
+                        1.00, 0.65, 0.75, 0.93, -0.01,
+                        0.65, 1.00, 0.75, 0.69, 0.07,
+                        0.75, 0.75, 1.00, 0.65, 0.01,
+                        0.93, 0.69, 0.65, 1.00, 0.00,
+                        -0.01, 0.07, 0.01, 0.00, 1.00),
+                     nrow=5)
+
+assets.sd <- c(
+                4.30,
+                6.10,
+                5.94,
+                5.13,
+                5.66) / 100
+
+assets.covar <- eff.cor2cov( assets.cor, assets.sd )
+
+assets.er <- matrix( c(
+                        1.01,
+                        1.35,
+                        1.51,
+                        0.95,
+                        0.54 ) / 100,
+                     nrow=1 )
+
+colnames(assets.er) <- c("large", "small", "value", "growth", "gold")
+
+
+risk.free.rate <- 0.4 / 100
+
+eff.noshort <- eff.frontier(assets.covar, 
+                            assets.er , 
+                            short="no", 
+                            risk.free.rate=risk.free.rate)
+
+eff.short <- eff.frontier(assets.covar, 
+                          assets.er , 
+                          short="yes", 
+                          risk.free.rate=risk.free.rate)
+```
+
+
+
+### Question 1.
+CANNOT short.  
+Find the portfolio that maximizes expected return  at same risk as 100% large stocks (sd=4.30%).
+What is the expected return / weights ?
+How much greater is expected return per month than 100% large stocks.
+
+```{r}
+
+eff <- eff.varEquals( eff.noshort, sd=4.30/100 )
+round(eff, 5)
+
+```
+
+
+### Question 2.
+CAN short.  
+Find the portfolio that maximizes expected return  at same risk as 100% large stocks.
+What is the expected return / weights ?
+Which asset do you short?
+Which asset has the biggest increase in weight over question 1?  Why?
+How much greater is expected return over question 1?
+Is shorting important in this example?
+
+```{r}
+
+eff <- eff.varEquals( eff.short, sd=4.30/100 )
+round(eff, 5)
+
+```
+
+
+### Question 3.
+CANNOT short.  
+Find the portfolio that maximizes sharpe ratio.
+What are the expected return / standard deviation / weights ?
+Is GOLD in the portfolio?  Why or why not?
+
+```{r}
+
+eff <- eff.maxSharpe( eff.noshort )
+round(eff, 5)
+
+```
+
+---
+
+## Part 2:  US/Japan/Asia-Pacific/Europe
+
+### Load the data
+
+Data copied from EfficientFrontier-US-International.xlsx 
+
+```{r}
+
+assets.cor <- matrix( c( 
+                         1.00, 0.41, 0.71, 0.79,
+                         0.41, 1.00, 0.47, 0.50,
+                         0.71, 0.47, 1.00, 0.75,
+                         0.79, 0.50, 0.75, 1.00 ),
+                     nrow=4 )
+assets.sd <- c( 
+                4.34,
+                5.97,
+                6.01,
+                5.04) / 100
+
+assets.covar <- eff.cor2cov( assets.cor, assets.sd )
+
+        
+assets.er <- matrix( c( 
+                        0.89,
+                        0.21,
+                        0.96,
+                        0.74) / 100,
+                     nrow=1)
+
+colnames(assets.er) <- c("us", "japan", "asia-pacific", "europe")
+
+risk.free.rate <- 0.24 / 100
+
+eff.noshort <- eff.frontier(assets.covar, 
+                            assets.er , 
+                            short="no", 
+                            risk.free.rate=risk.free.rate)
+
+```
+
+### Question 4
+CANNOT short.
+Find the portfolio that maximizes expected return for the same risk as 100% US stocks.
+What are the expected return and weights?
+
+```{r}
+
+eff <- eff.varEquals( eff.noshort, 4.34 / 100 , tolerance=0.00001)
+round(eff, 5)
+
+```
+
+### Question 5
+CANNOT short.
+Find the portfolio that maximizes sharpe ratio.  
+What are the expected returns, standard deviation, and weights?
+Is Japan in the portfolio?  Why or why not?
+
+```{r}
+
+eff <- eff.maxSharpe( eff.noshort)
+round(eff, 5)
+
+```
+
+
+### Question 6
+CANNOT short.
+Assume Japan expected return is 0.96% (same as Asia Pacific).
+Find the portfolio that maximizes sharpe ratio.  
+What are the expected returns, standard deviation, and weights?
+
+
+```{r}
+
+assets.er <- matrix( c( 
+                        0.89,
+                        0.96,
+                        0.96,
+                        0.74) / 100,
+                     nrow=1)
+
+colnames(assets.er) <- c("us", "japan", "asia-pacific", "europe")
+
+eff.noshort <- eff.frontier(assets.covar, 
+                            assets.er , 
+                            short="no", 
+                            risk.free.rate=risk.free.rate)
+
+eff <- eff.maxSharpe( eff.noshort )
+round(eff, 5)
+
+```
+
